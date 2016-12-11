@@ -4,13 +4,14 @@
 Structure your applications functionality into modules and autoload the packages ServiceProviders.
 
 ## Install and Setup
-1) Run ```composer require lassehaslev/laravel-modules```.
-2) Add the following line to ```providers``` in ```config/app.php``` 
+1. Run ```composer require lassehaslev/laravel-modules```.
+2. Add the following line to ```providers``` in ```config/app.php``` 
     ```
     LasseHaslev\LaravelModules\Providers\ServiceProvider::class,
     ```
-3) Ok, this step is very important: Add the following to your projects composer.json.
+3. Ok, this step is very important: Add the following to your projects composer.json.
     If you do not, we cannot find out where your modules are loaded from. 
+
     ```json
         "extra": {
             "merge-plugin": {
@@ -25,18 +26,19 @@ Structure your applications functionality into modules and autoload the packages
             }
         }
     ```
-4) Now, create ```Modules/``` in applications base folder.
+4. Now, create ```Modules/``` in applications base folder.
 
 ## Create local packages
 I recommend you to use [LasseHaslev/LaravelPackageTemlate](https://github.com/LasseHaslev/LaravelPackageTemplate) to get a flying start to your local package.
 
-1) ```cd``` in to your application folder
-2) Then run 
+1. ```cd``` in to your application folder
+2. Then run 
     ```git clone https://github.com/LasseHaslev/LaravelPackageTemplate.git Modules/{your-package-name}```
-3) ```cd Modules/{your-package-name}```
+3. ```cd Modules/{your-package-name}```
 
-4) Then run the package installer by typying ```./install.sh```. 
-5) Make sure you add the full class path to your composer.json
+4. Then run the package installer by typying ```./install.sh```. 
+5. Make sure you add the full class path to your composer.json
+
     ```json
     "extra": {
         "laravel-modules": {
@@ -44,7 +46,7 @@ I recommend you to use [LasseHaslev/LaravelPackageTemlate](https://github.com/La
         }
     }
     ```
-6) **Happy coding!**
+6. **Happy coding!**
 
 ## Configuration
 If you deside to change the place where your modules lives you must change path in composer.json ```extra.merge-plugin.include```.
