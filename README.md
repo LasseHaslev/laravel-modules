@@ -4,15 +4,12 @@
 Structure your applications functionality into modules and autoload the packages ServiceProviders.
 
 ## Install and Setup
-1)
-    Run ```composer require lassehaslev/laravel-modules```.
-2)
-    Add the following line to ```providers``` in ```config/app.php``` 
+1) Run ```composer require lassehaslev/laravel-modules```.
+2) Add the following line to ```providers``` in ```config/app.php``` 
     ```
     LasseHaslev\LaravelModules\Providers\ServiceProvider::class,
     ```
-3)
-    Ok, this step is very important: Add the following to your projects composer.json.
+3) Ok, this step is very important: Add the following to your projects composer.json.
     If you do not, we cannot find out where your modules are loaded from. 
     ```json
         "extra": {
@@ -28,8 +25,7 @@ Structure your applications functionality into modules and autoload the packages
             }
         }
     ```
-4)
-    Now, create ```Modules/``` in applications base folder.
+4) Now, create ```Modules/``` in applications base folder.
 
 ## Create local packages
 I recommend you to use [LasseHaslev/LaravelPackageTemlate](https://github.com/LasseHaslev/LaravelPackageTemplate) to get a flying start to your local package.
