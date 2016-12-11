@@ -61,7 +61,14 @@ class Modules
             abort( 500, 'Service container field does not exists in ('. $composerPath  .')' );
         }
 
-        dd( $composerContent[ 'name' ] );
+        $serviceProvider = $composerContent['extra']['laravel-modules']['service-provider'];
+
+        // Throw error if service provider does not exists
+        if ( ! class_exists( $serviceProvider )) {
+            abort( 500, sprintf( 'The service provider defined in %s does not exists.', $composerPath ) );
+        }
+        dd( class_exists( $serviceProvider ) );
+
     }
 
 }

@@ -44,10 +44,16 @@ class ModulesTest extends TestCase
     }
 
     /** @test */
-    // public function is_automaticly_registering_service_providers_for_() {
+    public function call_error_if_service_provider_does_not_exists() {
+        $this->expectException( HttpException::class );
+        Modules::register(__DIR__.'/NonWorkingModules/ServiceProviderDoesNotExists');
+    }
+
+    /** @test */
+    public function is_automaticly_registering_service_providers_for_() {
         // Config::set( 'modules.path', __DIR__.'/Modules' );
         // $modules = Modules::registerAll();
-    // }
+    }
 
 
 }
