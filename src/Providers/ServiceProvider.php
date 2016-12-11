@@ -1,6 +1,7 @@
 <?php namespace LasseHaslev\LaravelModules\Providers;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use LasseHaslev\LaravelModules\Modules;
 
 /**
  * Class ServiceProvider
@@ -16,6 +17,7 @@ class ServiceProvider extends BaseServiceProvider
     public function register()
     {
         $this->mergeConfigFrom( __DIR__.'/../../config/modules.php', 'modules');
+        Modules::registerAll();
     }
 
     /**
@@ -28,6 +30,6 @@ class ServiceProvider extends BaseServiceProvider
         $this->publishes([
             __DIR__.'/../../config/modules.php'=>'modules',
         ]);
-        $this->loadMigrationsFrom( __DIR__.'/../../database/migrations' );
+
     }
 }
