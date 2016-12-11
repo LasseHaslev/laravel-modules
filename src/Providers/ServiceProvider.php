@@ -17,7 +17,12 @@ class ServiceProvider extends BaseServiceProvider
     public function register()
     {
         $this->mergeConfigFrom( __DIR__.'/../../config/modules.php', 'modules');
-        Modules::registerAll();
+
+        // Prevent registering of routes if it is a unit test
+        // This is to prevent an error
+        if (!app()->runningUnitTests()) {
+            Modules::registerAll();
+        }
     }
 
     /**
