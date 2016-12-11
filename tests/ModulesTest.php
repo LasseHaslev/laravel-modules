@@ -51,8 +51,8 @@ class ModulesTest extends TestCase
 
     /** @test */
     public function is_automaticly_registering_service_providers_for_() {
-        // Config::set( 'modules.path', __DIR__.'/Modules' );
-        // $modules = Modules::registerAll();
+        Config::set( 'modules.path', __DIR__.'/Modules' );
+        $modules = Modules::registerAll();
     }
 
 

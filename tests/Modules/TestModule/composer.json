@@ -1,9 +1,25 @@
 {
     "name": "lassehaslev/test-module",
+    "type": "laravel-plugin",
+    "authors": [
+        {
+            "name": "Lasse S. Haslev",
+            "email": "lasse@haslev.no"
+        }
+    ],
     "require": {},
+    "require-dev": {
+        "orchestra/testbench": "3.3.x",
+        "phpunit/phpunit": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "LasseHaslev\\TestModule\\": "src/"
+        }
+    },
     "extra": {
         "laravel-modules": {
-            "service-provider": "Hello world"
+            "service-provider": "LasseHaslev\\TestModule\\Providers\\ServiceProvider"
         }
     }
 }

@@ -65,9 +65,10 @@ class Modules
 
         // Throw error if service provider does not exists
         if ( ! class_exists( $serviceProvider )) {
-            abort( 500, sprintf( 'The service provider defined in %s does not exists.', $composerPath ) );
+            abort( 500, sprintf( '"%s" defined in %s does not exists.', $serviceProvider, $composerPath ) );
         }
-        dd( class_exists( $serviceProvider ) );
+
+        app()->register( $serviceProvider );
 
     }
 
