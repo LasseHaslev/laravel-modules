@@ -7,11 +7,12 @@
             "email": "lasse@haslev.no"
         }
     ],
-    "require": {},
+    "require": {
+        "wikimedia/composer-merge-plugin": "1.x"
+    },
     "require-dev": {
         "orchestra/testbench": "3.3.x",
-        "phpunit/phpunit": "^5.6",
-        "wikimedia/composer-merge-plugin": "1.x"
+        "phpunit/phpunit": "^5.6"
     },
     "extra": {
         "merge-plugin": {

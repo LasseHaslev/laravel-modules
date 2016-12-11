@@ -1,80 +1,69 @@
-# lassehaslev/LaravelPackageTemplate
+# lassehaslev/laravel-modules
+> Use [Package development]( https://laravel.com/docs/5.3/packages ) in your local projects.
 
-## Getting started
-#### Install dependencies
+Structure your applications functionality into modules and autoload the packages ServiceProviders.
+
+## Install and Setup
+1)
+    Run ```composer require lassehaslev/laravel-modules```.
+2)
+    Add the following line to ```providers``` in ```config/app.php``` 
+    ```
+    LasseHaslev\LaravelModules\Providers\ServiceProvider::class,
+    ```
+3)
+    Ok, this step is very important: Add the following to your projects composer.json.
+    If you do not, we cannot find out where your modules are loaded from. 
+    ```json
+        "extra": {
+            "merge-plugin": {
+                "include": [
+                    "Modules/*/composer.json"
+                ],
+                "recurse": true,
+                "replace": false,
+                "merge-dev": true,
+                "merge-extra": false,
+                "merge-extra-deep": false
+            }
+        }
+    ```
+4)
+    Now, create ```Modules/``` in applications base folder.
+
+## Create local packages
+I recommend you to use [LasseHaslev/LaravelPackageTemlate](https://github.com/LasseHaslev/LaravelPackageTemplate) to get a flying start to your local package.
+
+1) ```cd``` in to your application folder
+2) Then run 
+    ```git clone https://github.com/LasseHaslev/LaravelPackageTemplate.git Modules/{your-package-name}```
+3) ```cd Modules/{your-package-name}```
+
+4) Then run the package installer by typying ```./install.sh```. 
+5) Make sure you add the full class path to your composer.json
+    ```json
+    "extra": {
+        "laravel-modules": {
+            "service-provider": "LasseHaslev\\TestModule\\Providers\\ServiceProvider"
+        }
+    }
+    ```
+6) **Happy coding!**
+
+## Configuration
+If you deside to change the place where your modules lives you must change path in composer.json ```extra.merge-plugin.include```.
+
+You must also overwrite the config for modules 
+```Config::set( 'modules.path', base_dir( 'your/new/path' ) )```
+
+## Development
 ``` bash
-# Make this package yours by running
-# Make shure you have to \slash every special character ("\" and "/")
-sh install.sh
-
-# If you did not wanted to let the script install dependencies for you
-
 # Install dependencies
 composer install
 
-# Install dependencies for automatic tests
+# Install for running automatic tests
 yarn
-```
 
-
-## Development
-#### Service provider
-Your package service provider can be found in ```src/Providers/ServiceProvider.php```.
-
-See [ Laravel documentations ](https://laravel.com/docs/5.3/packages#service-providers) for mor information.
-
-#### Configuration
-Your package configurations can be changed in ```config/```.
-
-See [ Laravel documentations ](https://laravel.com/docs/5.3/database-testing#writing-factories) for mor information.
-
-#### Migrations
-Your migrations should be added in ```database/migrations/```.
-
-See [ Laravel documentations ](https://laravel.com/docs/5.3/migrations) for mor information.
-
-#### Factories
-You can edit your factoreis in ```database/factories/ModelFactory.php```.
-
-See [ Laravel documentations ](https://laravel.com/docs/5.3/database-testing#writing-factories) for mor information.
-
-#### Write tests
-We use [PHPUnit](https://phpunit.de/) to write tests.
-For more information check out [https://laravel.com/docs/5.3/testing](https://laravel.com/docs/5.3/testing)
-
-Add your tests in ```tests/``` folder.
-
-Your migrations will automaticly be added before each test.
-``` php
-class MyTest extends TestCase {
-    /*
-     * This function will run before each test.
-     * ( Optional )
-     */
-    public function setUp()
-    {
-        parent::setUp();
-        // Your logic here
-    }
-
-    /** @test */
-    public function my_first_test() {
-        $this->assertTrue( true );
-    }
-}
-```
-
-## Usage after development
-Run ```composer require lassehaslev/laravel-modules```
-
-Create your package and add the following line to ```providers``` in ```config/app.php``` 
-```
-LasseHaslev\LaravelModules\Providers\ServiceProvider::class,
-```
-
-
-#### Runing tests
-``` bash
 # Run one time
 npm run test
 
