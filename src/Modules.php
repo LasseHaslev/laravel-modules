@@ -55,8 +55,13 @@ class Modules
             abort( 500, 'No composer file is found in ('. $module  .')' );
         }
 
-        $composerFile = $filesystem->get(  );
-        dd( $composerFile );
+        $composerContent = json_decode( $filesystem->get( $composerPath ), true );
+
+        if ( ! isset( $composerContent['extra']['laravel-modules']['service-provider'] ) ) {
+            abort( 500, 'Service container field does not exists in ('. $composerPath  .')' );
+        }
+
+        dd( $composerContent[ 'name' ] );
     }
 
 }

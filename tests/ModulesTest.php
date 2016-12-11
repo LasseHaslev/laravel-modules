@@ -38,9 +38,16 @@ class ModulesTest extends TestCase
     }
 
     /** @test */
+    public function throw_error_if_we_cannot_find_providers() {
+        $this->expectException( HttpException::class );
+        Modules::register(__DIR__.'/NonWorkingModules/MissingComposerServiceProviderField');
+    }
+
+    /** @test */
     // public function is_automaticly_registering_service_providers_for_() {
         // Config::set( 'modules.path', __DIR__.'/Modules' );
         // $modules = Modules::registerAll();
     // }
+
 
 }
