@@ -24,4 +24,39 @@ class Modules
         return $files;
     }
 
+    /**
+     * Register all modulesToServiceProvider
+     *
+     * @return void
+     */
+    public static function registerAll()
+    {
+        $modules = static::all();
+        foreach( $modules as $module ) {
+            static::register( $module );
+        }
+        // app()->register( $ )
+    }
+
+    /**
+     * undocumented function
+     *
+     * @return void
+     */
+    public static function register($module)
+    {
+        $filesystem = new Filesystem;
+        $composerPath = $module . '/composer.json';
+        if ( ! $filesystem->exists( $module ) ) {
+            abort( 500, 'This module does not exist. ('.$module.')' );
+        }
+
+        if ( ! $filesystem->exists($composerPath )) {
+            abort( 500, 'No composer file is found in ('. $module  .')' );
+        }
+
+        $composerFile = $filesystem->get(  );
+        dd( $composerFile );
+    }
+
 }

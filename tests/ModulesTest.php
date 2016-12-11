@@ -1,6 +1,7 @@
 <?php
 
 use LasseHaslev\LaravelModules\Modules;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Class ModulesTest
@@ -21,9 +22,25 @@ class ModulesTest extends TestCase
         $modules = Modules::all();
 
         $this->assertEquals( [ __DIR__.'/Modules/TestModule' ], $modules );
-
     }
-    // Get all folders within Modules folder
     // Register all serviceproviders inside the folder
+
+    /** @test */
+    public function throw_error_if_module_does_not_exists() {
+        $this->expectException( HttpException::class );
+        Modules::register(__DIR__.'/ThisDoesNotExists');
+    }
+
+    /** @test */
+    public function throw_error_if_no_composer_file_is_found_in_module() {
+        $this->expectException( HttpException::class );
+        Modules::register(__DIR__.'/NonWorkingModules/MissingComposer');
+    }
+
+    /** @test */
+    // public function is_automaticly_registering_service_providers_for_() {
+        // Config::set( 'modules.path', __DIR__.'/Modules' );
+        // $modules = Modules::registerAll();
+    // }
 
 }
