@@ -13,18 +13,18 @@ Structure your applications functionality into modules and autoload the packages
     If you do not, we cannot find out where your modules are loaded from. 
 
     ```json
-        "extra": {
-            "merge-plugin": {
-                "include": [
-                    "Modules/*/composer.json"
-                ],
-                "recurse": true,
-                "replace": false,
-                "merge-dev": true,
-                "merge-extra": false,
-                "merge-extra-deep": false
-            }
+    "extra": {
+        "merge-plugin": {
+            "include": [
+                "Modules/*/composer.json"
+            ],
+            "recurse": true,
+            "replace": false,
+            "merge-dev": true,
+            "merge-extra": false,
+            "merge-extra-deep": false
         }
+    }
     ```
 4. Now, create ```Modules/``` in applications base folder.
 
