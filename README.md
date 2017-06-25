@@ -29,24 +29,9 @@ Structure your applications functionality into modules and autoload the packages
 4. Now, create ```Modules/``` in applications base folder.
 
 ## Create local packages
-I recommend you to use [LasseHaslev/LaravelPackageTemlate](https://github.com/LasseHaslev/LaravelPackageTemplate) to get a flying start to your local package.
+I recommend you to use [LasseHaslev/laravel-package-template](https://github.com/LasseHaslev/laravel-package-template) to get a flying start to your local package.
 
-1. ```cd``` in to your application folder
-2. Then run 
-    ```git clone https://github.com/LasseHaslev/LaravelPackageTemplate.git Modules/{your-package-name}```
-3. ```cd Modules/{your-package-name}```
-
-4. Then run the package installer by typying ```./install.sh```. 
-5. Make sure you add the full class path to your composer.json
-
-    ```json
-    "extra": {
-        "laravel-modules": {
-            "service-provider": "LasseHaslev\\TestModule\\Providers\\ServiceProvider"
-        }
-    }
-    ```
-6. **Happy coding!**
+Go to [LasseHaslev/laravel-package-template](https://github.com/LasseHaslev/laravel-package-template) quick package setup.
 
 ## Configuration
 If you deside to change the place where your modules lives you must change path in composer.json ```extra.merge-plugin.include```.
