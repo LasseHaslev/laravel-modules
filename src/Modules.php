@@ -3,6 +3,7 @@
 namespace LasseHaslev\LaravelModules;
 
 use Illuminate\Filesystem\Filesystem;
+// use Illuminate\Foundation\PackageManifest;
 
 /**
  * Class Modules
@@ -11,7 +12,7 @@ use Illuminate\Filesystem\Filesystem;
 class Modules
 {
     /**
-     * undocumented function
+     * Get all folders of modules
      *
      * @return void
      */
@@ -21,21 +22,16 @@ class Modules
 
         $filesystem = new Filesystem;
         $files = $filesystem->directories( $modules );
-        return $files;
-    }
 
-    /**
-     * Register all modulesToServiceProvider
-     *
-     * @return void
-     */
-    public static function registerAll()
-    {
-        $modules = static::all();
-        foreach( $modules as $module ) {
-            static::register( $module );
+        $returnArray = [];
+        foreach ($files as $file) {
+            $composerContent = static::getComposerData( $file );
+            if ( $composerContent ) {
+                $returnArray[] = $composerContent;
+            }
         }
-        // app()->register( $ )
+
+        return $returnArray;
     }
 
     /**
@@ -43,33 +39,44 @@ class Modules
      *
      * @return void
      */
-    public static function register($module)
+    public static function getComposerData($module)
     {
         $filesystem = new Filesystem;
         $composerPath = $module . '/composer.json';
         if ( ! $filesystem->exists( $module ) ) {
-            abort( 500, 'This module does not exist. ('.$module.')' );
+            return;
         }
 
         if ( ! $filesystem->exists($composerPath )) {
-            abort( 500, 'No composer file is found in ('. $module  .')' );
+            return;
         }
 
-        $composerContent = json_decode( $filesystem->get( $composerPath ), true );
+        return json_decode( $filesystem->get( $composerPath ), true );
 
-        if ( ! isset( $composerContent['extra']['laravel-modules']['service-provider'] ) ) {
-            abort( 500, 'Service container field does not exists in ('. $composerPath  .')' );
-        }
+
+    }
+
+    /**
+     * undocumented function
+     *
+     * @return void
+     */
+    public static function getData($param)
+    {
+        // if ( ! isset( $composerContent['extra']['laravel-modules']['service-provider'] ) ) {
+            // abort( 500, 'Service container field does not exists in ('. $composerPath  .')' );
+        // }
 
         $serviceProvider = $composerContent['extra']['laravel-modules']['service-provider'];
 
         // Throw error if service provider does not exists
-        if ( ! class_exists( $serviceProvider )) {
-            abort( 500, sprintf( '"%s" defined in %s does not exists.', $serviceProvider, $composerPath ) );
-        }
+
+        // if ( ! class_exists( '\\' . $serviceProvider )) {
+            // abort( 500, sprintf( '"%s" defined in %s does not exists.', $serviceProvider, $composerPath ) );
+        // }
 
         app()->register( $serviceProvider );
-
     }
+
 
 }

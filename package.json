@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "tdd": "executor './vendor/bin/phpunit --color=always' --watch='**/*.php' --ignore='node_modules/' --ignore='vendor/'"
+    "tdd": "executor './vendor/bin/phpunit --filter='ModulesTest' --color=always' --watch='**/*.php' --ignore='node_modules/' --ignore='vendor/'"
   },
   "devDependencies": {
     "@lassehaslev/executor": "^0.1.2"

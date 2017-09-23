@@ -18,8 +18,8 @@
         }
     },
     "extra": {
-        "laravel-modules": {
-            "service-provider": "LasseHaslev\\TestModule\\Providers\\ServiceProvider"
+        "laravel": {
+            "providers": [ "LasseHaslev\\TestModule\\Providers\\ServiceProvider" ]
         }
     }
 }

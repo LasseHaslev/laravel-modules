@@ -18,7 +18,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->mergeConfigFrom( __DIR__.'/../../config/modules.php', 'modules');
 
-        Modules::registerAll();
+        // Modules::registerAll();
     }
 
     /**
