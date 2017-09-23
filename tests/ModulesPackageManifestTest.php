@@ -22,18 +22,32 @@ class ModulesPackageManifestTest extends TestCase
     }
 
     /** @test */
-    public function can_get_all_folders_within_modules_folder() {
-        Config::set( 'modules.path', __DIR__.'/Mocks/Modules' );
-        $modules = $this->manifest->moduleFolders();
-
-        $this->assertEquals( [ __DIR__.'/Mocks/Modules/TestModule' ], $modules );
-    }
-
-    /** @test */
     public function testAssetLoading()
     {
         $this->manifest->build();
-        dd( $this->manifest );
+        $this->assertEquals( [
+            "lassehaslev/test-module" => [
+                "providers" => [
+                    "LasseHaslev\TestModule\Providers\ServiceProvider"
+                ]
+            ]
+        ], $this->manifest->getAutoDescoveryPackages() );
+        $this->assertTrue( true );
     }
+
+    /** @test */
+    // This works
+    // public function is_extending_existing_packages() {
+
+        // $files = new Filesystem;
+
+        // // Reset
+        // $files->put(
+            // $this->manifest->manifestPath, '<?php return '.var_export([ 'non-existing'=>[] ], true).';'
+        // );
+
+        // $this->manifest->build();
+
+    // }
 
 }

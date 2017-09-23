@@ -23,11 +23,18 @@ class ModulesPackageManifest extends PackageManifest
 
         parent::build();
 
-        $this->write( $this->getAutoDescoveryPackages() );
+        // Get existing data
+        $existing = $this->getManifest();
+
+        // Get new
+        $newPackages = $this->getAutoDescoveryPackages();
+
+        // Merge and Write
+        $this->write( array_merge( $existing, $newPackages ) );
 
     }
 
-    protected function getAutoDescoveryPackages()
+    public function getAutoDescoveryPackages()
     {
         $composerDatas = collect( Modules::allComposerContent() );
 
