@@ -45,5 +45,7 @@ class DiscoverModules extends Command
 
         $this->manifest->build();
 
+        $this->info( 'Package manifest generated successfully.' );
+
     }
 }
