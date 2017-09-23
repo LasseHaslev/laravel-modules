@@ -21,22 +21,47 @@ class ModulesPackageManifest extends PackageManifest
     public function build()
     {
 
-        // parent::build();
+        parent::build();
 
-        Modules::
+        $this->write( $this->getAutoDescoveryPackages() );
 
-        // $packages = [];
-        // if ($this->files->exists($path = $this->vendorPath.'/composer/installed.json')) {
-            // $packages = json_decode($this->files->get($path), true);
-        // }
-        // $ignoreAll = in_array('*', $ignore = $this->packagesToIgnore());
-        // $this->write(collect($packages)->mapWithKeys(function ($package) {
-            // return [$this->format($package['name']) => $package['extra']['laravel'] ?? []];
-        // })->each(function ($configuration) use (&$ignore) {
-            // $ignore += $configuration['dont-discover'] ?? [];
-        // })->reject(function ($configuration, $package) use ($ignore, $ignoreAll) {
-            // return $ignoreAll || in_array($package, $ignore);
-        // })->filter()->all());
+    }
+
+    protected function getAutoDescoveryPackages()
+    {
+        $composerDatas = collect( Modules::allComposerContent() );
+
+        $return = $composerDatas->filter( function( $composer )
+        {
+            return isset( $composer[ 'extra' ]['laravel'] );
+        } )->map( function( $composer )
+        {
+            $return = [
+                'name'=>$composer[ 'name' ],
+            ];
+
+            if (isset($composer['extra']['laravel'][ 'providers' ])) {
+                $return['providers']=$composer['extra']['laravel'][ 'providers' ];
+            }
+            if (isset($composer['extra']['laravel'][ 'aliases' ])) {
+                $return['providers']=$composer['extra']['laravel'][ 'aliases' ];
+            }
+
+            return $return;
+        } );
+
+        foreach ($return as $key=>$value) {
+
+            $name = $value['name'];
+            unset( $value['name'] );
+
+            $return[ $name ] = $value;
+
+            unset( $return[$key] );
+        }
+
+        return $return->toArray();
+
     }
 
 
