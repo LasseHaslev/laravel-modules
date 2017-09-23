@@ -32,5 +32,10 @@ class ServiceProvider extends BaseServiceProvider
             __DIR__.'/../../config/modules.php'=>'modules',
         ]);
 
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                MakeModulesFolder::class,
+            ]);
+        }
     }
 }
