@@ -11,8 +11,9 @@ use Illuminate\Filesystem\Filesystem;
  */
 class Modules
 {
+
     /**
-     * Get all folders of modules
+     * Get path of all module packages
      *
      * @return void
      */
@@ -21,7 +22,19 @@ class Modules
         $modules = config( 'modules.path' );
 
         $filesystem = new Filesystem;
-        $files = $filesystem->directories( $modules );
+        return $filesystem->directories( $modules );
+    }
+
+
+    /**
+     * Get content of all composer files in modules folder
+     *
+     * @return void
+     */
+    public static function allComposerContent()
+    {
+
+        $files = static::all();
 
         $returnArray = [];
         foreach ($files as $file) {

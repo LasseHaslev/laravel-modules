@@ -26,16 +26,30 @@ class ModulesTest extends TestCase
 
     /** @test */
     public function can_get_all_folders_within_modules_folder() {
+        Config::set( 'modules.path', __DIR__.'/Mocks/Modules' );
+        $modules = Modules::all();
+
+        $this->assertEquals( [
+            __DIR__.'/Mocks/Modules/MissingComposer',
+            __DIR__.'/Mocks/Modules/MissingComposerServiceProviderField',
+            __DIR__.'/Mocks/Modules/ServiceProviderDoesNotExists',
+            __DIR__.'/Mocks/Modules/TestModule',
+        ], $modules );
+    }
+
+    /** @test */
+    public function get_content_of_all_composer_files_in_modules_folder() {
 
         $filesystem = new Filesystem;
 
         Config::set( 'modules.path', __DIR__.'/Mocks/Modules' );
-        $modules = Modules::all();
+        $modules = Modules::allComposerContent();
 
         $this->assertContains( json_decode( $filesystem->get( __DIR__.'/Mocks/Modules/TestModule/composer.json' ), true ), $modules );
 
 
     }
+
     // Register all serviceproviders inside the folder
 
     /** @test */
