@@ -9,6 +9,17 @@ use Illuminate\Filesystem\Filesystem;
 
 class MakeModulesFolder extends Command
 {
+
+    /**
+     * @param mixed  $filesystem Filesystem
+     */
+    public function __construct( Filesystem $filesystem )
+    {
+        parent::__construct();
+        $this->files = $filesystem;
+    }
+
+
     /**
      * The name and signature of the console command.
      *
@@ -32,9 +43,14 @@ class MakeModulesFolder extends Command
     {
 
         $path = config( 'modules.path' );
-        Filesystem::makeDirectory( $path );
+        if ( ! $this->files->exists( $path ) ) {
+            $this->files->makeDirectory( $path );
+            $this->info( sprintf( 'Created directory for Modules at %s', $path ) );
+        }
+        else {
+            $this->info( 'Directory already exists' );
+        }
 
-        $this->info( sprintf( 'Created directory for Modules at %s', $path ) );
 
     }
 }
