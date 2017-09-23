@@ -32,7 +32,6 @@ class MakeModulesFolder extends Command
     {
 
         $path = config( 'modules.path' );
-        dd( $path );
         File::makeDirectory( $path );
 
         $this->info( sprintf( 'Created directory for Modules at %s', $path ) );
