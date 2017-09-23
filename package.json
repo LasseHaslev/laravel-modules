@@ -1,10 +1,8 @@
 {
-  "dependencies": {
-    "gulp": "^3.9.1",
-    "laravel-elixir": "^6.0.0-14"
-  },
   "scripts": {
-      "test": "gulp",
-      "dev": "gulp tdd"
+    "tdd": "executor './vendor/bin/phpunit --color=always' --watch='**/*.php' --ignore='node_modules/' --ignore='vendor/'"
+  },
+  "devDependencies": {
+    "@lassehaslev/executor": "^0.1.2"
   }
 }
