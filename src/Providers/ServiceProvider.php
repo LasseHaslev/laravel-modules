@@ -2,6 +2,8 @@
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use LasseHaslev\LaravelModules\Modules;
+use LasseHaslev\LaravelModules\Console\Commands\MakeModulesFolder;
+
 
 /**
  * Class ServiceProvider

@@ -7,7 +7,7 @@ use App\DripEmailer;
 use Illuminate\Console\Command;
 use Illuminate\Http\File;
 
-class SendEmails extends Command
+class MakeModulesFolder extends Command
 {
     /**
      * The name and signature of the console command.
