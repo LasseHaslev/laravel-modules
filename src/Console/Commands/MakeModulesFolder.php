@@ -5,7 +5,7 @@ namespace LasseHaslev\LaravelModules\Console\Commands;
 use App\User;
 use App\DripEmailer;
 use Illuminate\Console\Command;
-use Illuminate\Http\File;
+use Illuminate\Filesystem\Filesystem;
 
 class MakeModulesFolder extends Command
 {
@@ -32,7 +32,7 @@ class MakeModulesFolder extends Command
     {
 
         $path = config( 'modules.path' );
-        File::makeDirectory( $path );
+        Filesystem::makeDirectory( $path );
 
         $this->info( sprintf( 'Created directory for Modules at %s', $path ) );
 
