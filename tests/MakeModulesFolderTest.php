@@ -15,7 +15,6 @@ class MakeModulesFolderTest extends TestCase
     /** @test */
     public function lijseflijselfijsef() {
         $test = Artisan::call( 'modules:make-folder' );
-
         $filesystem = app( Filesystem::class );
 
         $this->assertFileExists( base_path( 'Modules' ) );

@@ -3,6 +3,7 @@
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use LasseHaslev\LaravelModules\Modules;
 use LasseHaslev\LaravelModules\Console\Commands\MakeModulesFolder;
+use LasseHaslev\LaravelModules\Console\Commands\DiscoverModules;
 
 
 /**
@@ -35,6 +36,7 @@ class ServiceProvider extends BaseServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 MakeModulesFolder::class,
+                DiscoverModules::class,
             ]);
         }
     }
