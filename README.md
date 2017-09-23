@@ -5,7 +5,7 @@ Structure your applications functionality into modules and autoload the packages
 
 ## Install and Setup
 1. Run ```composer require lassehaslev/laravel-modules```.
-2. Add the following line to ```providers``` in ```config/app.php``` 
+2. *(Not needed in laravel 5.5)* Add the following line to ```providers``` in ```config/app.php``` 
     ```
     LasseHaslev\LaravelModules\Providers\ServiceProvider::class,
     ```
@@ -14,6 +14,7 @@ Structure your applications functionality into modules and autoload the packages
 
     ```json
     "extra": {
+        ...
         "merge-plugin": {
             "include": [
                 "Modules/*/composer.json"
@@ -26,7 +27,20 @@ Structure your applications functionality into modules and autoload the packages
         }
     }
     ```
-4. Now, create ```Modules/``` in applications base folder.
+4. Now, run ```php artisan modules:make-folder``` to create modules folder.
+
+## Discover packages
+
+Run `php artisan package:discover-modules` to find all packages.
+
+> You should replace the discover function in composer to auto update every time you run a composer command.
+
+```
+"post-autoload-dump": [
+    ...
+    "@php artisan package:discover-modules"
+]
+```
 
 ## Create local packages
 I recommend you to use [LasseHaslev/laravel-package-template](https://github.com/LasseHaslev/laravel-package-template) to get a flying start to your local package.
