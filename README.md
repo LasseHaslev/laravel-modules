@@ -47,6 +47,9 @@ composer install
 # Install for running automatic tests
 yarn
 
+# Make Modules folders in orcestra to make tests work
+mkdir vendor/orchestra/testbench-core/laravel/Modules
+
 # Run one time
 npm run test
 
