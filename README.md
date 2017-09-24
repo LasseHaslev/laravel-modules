@@ -29,9 +29,11 @@ Structure your applications functionality into modules and autoload the packages
     ```
 4. Now, run ```php artisan modules:make-folder``` to create modules folder.
 
-## Discover packages
+### Discover packages
 
 Run `php artisan package:discover-modules` to find all packages.
+
+This will discover vendor packages and package modules.
 
 > You should replace the discover function in composer to auto update every time you run a composer command.
 
@@ -41,6 +43,8 @@ Run `php artisan package:discover-modules` to find all packages.
     "@php artisan package:discover-modules"
 ]
 ```
+
+> Remember to run this command every time you create a new module.
 
 ## Create local packages
 I recommend you to use [LasseHaslev/laravel-package-template](https://github.com/LasseHaslev/laravel-package-template) to get a flying start to your local package.

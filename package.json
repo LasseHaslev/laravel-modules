@@ -3,6 +3,6 @@
     "tdd": "executor './vendor/bin/phpunit --color=always' --watch='**/*.php' --ignore='node_modules/' --ignore='vendor/'"
   },
   "devDependencies": {
-    "@lassehaslev/executor": "^0.1.2"
+    "@lassehaslev/executor": "^1.0.1"
   }
 }
